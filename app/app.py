@@ -94,12 +94,42 @@ transform = transforms.Compose([
 # -----------------------
 
 st.title("Skin Lesion Risk Classifier")
+
 st.write(
     "Upload a skin lesion image to estimate whether it is **benign** or **malignant**."
 )
+
 st.caption(
     "Research demo only. This tool is not a medical diagnosis."
 )
+
+# -----------------------
+# Supported classes
+# -----------------------
+
+st.subheader("Supported Lesion Types")
+
+st.markdown("""
+**Benign lesions**
+- Melanocytic nevi (`nv`)
+- Benign keratosis-like lesions (`bkl`)
+- Dermatofibroma (`df`)
+- Vascular lesions (`vasc`)
+
+**Malignant lesions**
+- Melanoma (`mel`)
+- Basal cell carcinoma (`bcc`)
+- Actinic keratoses / intraepithelial carcinoma (`akiec`)
+""")
+
+st.caption(
+    "Ground-truth validation is available **only** for images originating "
+    "from the HAM10000 dataset."
+)
+
+# -----------------------
+# File upload
+# -----------------------
 
 uploaded_file = st.file_uploader(
     "Drag and drop an image here (JPG or PNG)",
@@ -131,6 +161,11 @@ if uploaded_file is not None:
     st.write(f"Benign probability: **{benign_prob * 100:.2f}%**")
     st.write(f"Malignant probability: **{malignant_prob * 100:.2f}%**")
     st.progress(malignant_prob)
+
+    st.caption(
+        "Low-confidence predictions are labeled as uncertain and should be "
+        "interpreted with caution."
+    )
 
     # -----------------------
     # Ground truth lookup
