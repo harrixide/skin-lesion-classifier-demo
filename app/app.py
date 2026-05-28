@@ -93,7 +93,9 @@ transform = transforms.Compose([
 # UI
 # -----------------------
 
-st.title("Skin Lesion Risk Classifier")
+st.title("DermaScope")
+st.markdown("#### Skin Lesion Risk Classifier")
+st.markdown("---")
 
 st.write(
     "Upload a skin lesion image to estimate whether it is **benign** or **malignant**."
